@@ -20,4 +20,6 @@ ehthumbs_vista.db
 
 # Other
 node_modules/
+dist/
+.npm/
 

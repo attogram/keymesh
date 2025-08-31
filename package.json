@@ -2,11 +2,12 @@
   "name": "keymesh",
   "version": "1.0.0",
   "description": "Generate a mesh of cryptocurrency addresses from a single private key",
+  "type": "module",
   "main": "keymesh.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "patch-package",
-    "build": "esbuild js/main.js --bundle --outfile=dist/bundle.js --sourcemap"
+    "build": "node build.mjs"
   },
   "keywords": [
     "crypto",
@@ -35,6 +36,8 @@
   },
   "devDependencies": {
     "esbuild": "^0.23.0",
+    "esbuild-plugin-polyfill-node": "^0.3.0",
+    "esbuild-plugin-wasm": "^1.1.0",
     "patch-package": "^8.0.0",
     "prettier": "3.6.2"
   }
