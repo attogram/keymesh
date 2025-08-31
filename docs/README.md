@@ -1,6 +1,14 @@
 # Documentation
 
-This directory contains the documentation for the `base` project.
+This directory contains the documentation for the **keymesh** project.
+
+The original documentation for the `base` template has been preserved below for reference, but the primary documentation for this tool is now located in the `keymesh.md` file.
+
+- **[KeyMesh Tool Documentation](./keymesh.md)**: The main guide covering KeyMesh features, usage, and security best practices.
+
+---
+
+### `base` Template Documentation
 
 - **[The `base` Philosophy](./base.md)**: An overview of the core principles and goals behind this template repository.
 - **[Docker-based Development Environment](./docker.md)**: Instructions on how to use the included Docker setup for a consistent development environment.

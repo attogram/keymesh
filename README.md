@@ -75,5 +75,6 @@
     </footer>
 
     <script type="module" src="dist/bundle.js" defer></script>
+
 </body>
 </html>
