@@ -9,6 +9,6 @@
 
 Welcome to keymesh
 
-[https://github.com/attogram/keymesh/issues/1](https://github.com/attogram/keymesh/issues/1)
+Site Creation Prompt: [https://github.com/attogram/keymesh/issues/1](https://github.com/attogram/keymesh/issues/1)
 
-[https://github.com/attogram/keymesh](https://github.com/attogram/keymesh)
+Repo: [https://github.com/attogram/keymesh](https://github.com/attogram/keymesh)
