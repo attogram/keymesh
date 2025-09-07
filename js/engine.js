@@ -47,7 +47,6 @@ const derivationPaths = {
   ethereum: "m/44'/60'/0'/0/0",
   solana: "m/44'/501'/0'/0/0",
   stellar: "m/44'/148'/0'",
-  ripple: "m/44'/144'/0'/0/0",
 };
 
 export async function deriveAllAddresses(mnemonic) {
@@ -65,7 +64,25 @@ export async function deriveAllAddresses(mnemonic) {
   let results = {};
 
   console.log("5. Deriving BTC-like addresses...");
-  for (const chain of ["bitcoin", "litecoin", "dogecoin"]) {
+
+  // Special handling for Bitcoin (BIP84)
+  const bip84Network = {
+    ...networks.bitcoin,
+    bip32: {
+      public: 0x04b24746, // zpub
+      private: 0x04b2430c, // zprv
+    },
+  };
+  const bip84Root = bip32.fromSeed(seed, bip84Network);
+  const btcChild = bip84Root.derivePath(derivationPaths.bitcoin);
+  const btcPayment = bitcoin.payments.p2wpkh({
+    pubkey: btcChild.publicKey,
+    network: networks.bitcoin,
+  });
+  results["bitcoin"] = btcPayment.address;
+
+  // Handle other BTC-like coins
+  for (const chain of ["litecoin", "dogecoin"]) {
     console.log(`  - Deriving for ${chain}`);
     const child = root.derivePath(derivationPaths[chain]);
     let payment;
@@ -75,6 +92,7 @@ export async function deriveAllAddresses(mnemonic) {
         network: networks[chain],
       });
     } else {
+      // This is for Litecoin, which also uses p2wpkh
       payment = bitcoin.payments.p2wpkh({
         pubkey: child.publicKey,
         network: networks[chain],
@@ -107,6 +125,7 @@ export async function deriveAllAddresses(mnemonic) {
     "optimism",
     "bnb_smart_chain",
     "fantom",
+    "fuse",
   ];
   evmChains.forEach((chain) => {
     results[chain] = ethNode.address;
@@ -124,12 +143,7 @@ export async function deriveAllAddresses(mnemonic) {
   );
   results["stellar"] = stellarKeys.publicKey();
 
-  console.log("11. Deriving Ripple (XRP)...");
-  const xrpNode = root.derivePath(derivationPaths.ripple);
-  const xrpKeyPair = ECPair.fromPrivateKey(xrpNode.privateKey);
-  results["ripple"] = `(XRP derivation from BIP39 is non-standard)`;
-
-  console.log("12. Derivation complete.");
+  console.log("11. Derivation complete.");
   return results;
 }
 
