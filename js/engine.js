@@ -6,8 +6,8 @@ import { BIP32Factory } from "bip32";
 import { HDNode } from "@ethersproject/hdnode";
 import * as solanaWeb3 from "@solana/web3.js";
 import * as stellar from "@stellar/stellar-sdk";
-import { default as bitcore } from "bitcore-lib-cash";
 import { default as dashcore } from "@dashevo/dashcore-lib";
+import bchaddr from "bchaddrjs";
 import xrpl from "xrpl";
 
 // Initialize libraries
@@ -103,10 +103,11 @@ export async function deriveAllAddresses(mnemonic) {
 
   console.log("6. Deriving BCH...");
   const bchNode = root.derivePath(derivationPaths.bitcoin_cash);
-  const bchPrivateKey = new bitcore.PrivateKey(
-    bchNode.privateKey.toString("hex")
-  );
-  results["bitcoin_cash"] = bchPrivateKey.toAddress().toString();
+  const bchLegacyAddress = bitcoin.payments.p2pkh({
+    pubkey: bchNode.publicKey,
+    network: networks.bitcoin, // Bitcoin Cash uses the same network parameters as Bitcoin for legacy addresses
+  }).address;
+  results["bitcoin_cash"] = bchaddr.toCashAddress(bchLegacyAddress);
 
   console.log("7. Deriving Dash...");
   const dashNode = root.derivePath(derivationPaths.dash);
