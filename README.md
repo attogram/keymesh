@@ -11,6 +11,6 @@
 
 Generate a mesh of cryptocurrency addresses from a single private key.
 
-- **[Live Application](/pages/)**
+- **[Live Application](./pages/)**
 - [Documentation](./docs/README.md)
 - Repo: [https://github.com/attogram/keymesh](https://github.com/attogram/keymesh)
