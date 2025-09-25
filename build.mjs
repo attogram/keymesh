@@ -21,6 +21,9 @@ try {
     format: "esm",
     platform: "browser",
     plugins: [wasmLoader(), polyfillNode()],
+    banner: {
+      js: "var global = window;",
+    },
   });
   console.log(
     `Build reported success. Checking for output file at: ${outfile}`
