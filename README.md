@@ -7,3 +7,5 @@
 [![License](https://img.shields.io/github/license/attogram/keymesh?style=flat)](./LICENSE)
 
 keymesh v2
+
+[Documentation](./docs/README.md)
