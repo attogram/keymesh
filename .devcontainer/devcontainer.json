@@ -1,5 +1,5 @@
 {
-  "name": "Base Template Dev Environment",
+  "name": "Keymesh Dev Environment",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/workspace",
